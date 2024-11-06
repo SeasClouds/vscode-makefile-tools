@@ -1,8 +1,8 @@
 {
   "makefile-tools.command.makefile.buildTarget.title": "Makefile: Build the current target",
-  "makefile-tools.command.makefile.buildCleanTarget.title": "Makefile: Build clean the current target",
+  "makefile-tools.command.makefile.buildCleanTarget.title": "Makefile: Clean and build the current target",
   "makefile-tools.command.makefile.buildAll.title": "Makefile: Build the target ALL",
-  "makefile-tools.command.makefile.buildCleanAll.title": "Makefile: Build clean the target ALL",
+  "makefile-tools.command.makefile.buildCleanAll.title": "Makefile: Clean and build the target ALL",
   "makefile-tools.command.makefile.launchDebug.title": "Makefile: Debug the selected binary target",
   "makefile-tools.command.makefile.launchRun.title": "Makefile: Run the selected binary target in the terminal",
   "makefile-tools.command.makefile.setBuildConfiguration.title": "Makefile: Set the current build configuration",
@@ -68,5 +68,6 @@
   "makefile-tools.configuration.makefile.clearOutputBeforeBuild.description": "Clear the output channel at the beginning of a build",
   "makefile-tools.configuration.makefile.compileCommandsPath.description": "The path to the compilation database file",
   "makefile-tools.configuration.makefile.panel.visibility.debug.description": "Enable debugging locally (in this host) images built by this extension",
-  "makefile-tools.configuration.makefile.panel.visibility.run.description": "Enable running locally (in this host) images built by this extension"
+  "makefile-tools.configuration.makefile.panel.visibility.run.description": "Enable running locally (in this host) images built by this extension",
+  "makefile-tools.configuration.makefile.panel.visibility.description": "Modify this setting to control the visibility setting in the Makefile Project Outline panel."
 }

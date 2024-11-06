@@ -1,6 +1,33 @@
 # What's New?
 
-## 0.10
+## 0.12
+
+Improvements:
+
+- Make the wording more clear for the clean and build command. [#136](https://github.com/microsoft/vscode-makefile-tools/issues/136)
+
+## 0.11
+
+Improvements:
+
+- More wisely pass the modified environment variables, if present, from the pre/post-configure scripts to tasks and debugging options. [#540](https://github.com/microsoft/vscode-makefile-tools/issues/540), [#493](https://github.com/microsoft/vscode-makefile-tools/issues/493), [#554](https://github.com/microsoft/vscode-makefile-tools/issues/554)
+
+Bug Fixes:
+
+- Ensure that we append line endings, which fixes a recent regression. [#641](https://github.com/microsoft/vscode-makefile-tools/issues/641)
+- Ensure we handle parenthesis without their partner correctly. [#543](https://github.com/microsoft/vscode-makefile-tools/issues/543)
+
+Improvements:
+
+- Update signing to support VSCode extension signing. [#647](https://github.com/microsoft/vscode-makefile-tools/pull/647)
+
+## 0.10.26
+
+Bug Fixes:
+
+- Fix issue where the Makefile Extension was blocked on answering the "Would you like to Configure..." pop-up. [#639](https://github.com/microsoft/vscode-makefile-tools/issues/639)
+
+## 0.10.25
 
 Improvements:
 
@@ -10,6 +37,10 @@ Bug Fixes:
 
 - Fix issue where simply clicking on tree item was opening launch target selection. [#588](https://github.com/microsoft/vscode-makefile-tools/issues/588)
 - Fix issue where selecting "Default" from the configuration drop down doesn't update Makefile Project Outline [#585](https://github.com/microsoft/vscode-makefile-tools/issues/585)
+- Fix issue where CHS and CHT wasn't being localized on Linux. [#609](https://github.com/microsoft/vscode-makefile-tools/issues/609)
+- Ensure that tooltips for the project outline are reasonable and consistent. [#600](https://github.com/microsoft/vscode-makefile-tools/issues/600)
+- Fix issue where clicking out of quick pick wasn't closing quick pick. [#604](https://github.com/microsoft/vscode-makefile-tools/issues/604)
+- Fix issue where line endings were being added in the output which broke long compile commands from output of make.exe. [#545](https://github.com/microsoft/vscode-makefile-tools/issues/545)
 
 ## 0.9
 

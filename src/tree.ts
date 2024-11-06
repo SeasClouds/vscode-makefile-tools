@@ -70,7 +70,6 @@ export class BuildTargetNode extends BaseNode {
 
 export class LaunchTargetNode extends BaseNode {
   _name: string;
-  _toolTip: string;
 
   // Keep the tree node label as short as possible.
   // The binary path is the most important component of a launch target.
@@ -82,7 +81,7 @@ export class LaunchTargetNode extends BaseNode {
     let shortName: string;
 
     if (!launchConfiguration) {
-      shortName = "Unset";
+      shortName = localize("Unset", "Unset");
     } else {
       if (vscode.workspace.workspaceFolders) {
         // In a complete launch target string, the binary path is relative to cwd.
@@ -107,15 +106,13 @@ export class LaunchTargetNode extends BaseNode {
   constructor(targetName: string) {
     super(`launchTarget:${targetName}`);
 
-    // Show the complete launch target name as tooltip and the short name as label
+    // Show the short name as label
     this._name = targetName;
-    this._toolTip = targetName;
   }
 
   async update(targetName: string): Promise<void> {
-    // Show the complete launch target name as tooltip and the short name as label
+    // Show short name as label
     this._name = await this.getShortLaunchTargetName(targetName);
-    this._toolTip = targetName;
   }
 
   getChildren(): BaseNode[] {
@@ -128,8 +125,7 @@ export class LaunchTargetNode extends BaseNode {
       item.collapsibleState = vscode.TreeItemCollapsibleState.None;
       item.tooltip = localize(
         "launch.target.currently.selected.for.debug.run.in.terminal",
-        "The launch target currently selected for debug and run in terminal.\n{0}",
-        this._toolTip
+        "The launch target currently selected for debug and run in terminal."
       );
       item.contextValue = [`nodeType=launchTarget`].join(",");
       return item;
@@ -169,8 +165,10 @@ export class ConfigurationNode extends BaseNode {
     try {
       const item: vscode.TreeItem = new vscode.TreeItem(this._name);
       item.collapsibleState = vscode.TreeItemCollapsibleState.None;
-      item.tooltip =
-        "The makefile configuration currently selected from settings ('makefile.configurations').";
+      item.tooltip = localize(
+        "makefile.currently.selected.configuration",
+        "The makefile configuration currently selected from settings ('makefile.configurations')."
+      );
       item.contextValue = [`nodeType=configuration`].join(",");
       return item;
     } catch (e) {
@@ -269,11 +267,9 @@ export class BuildLogPathInfoNode extends BaseNode {
   constructor(pathInSettings: string, pathDisplayed: string) {
     super(pathDisplayed);
     this._title = pathDisplayed;
-    this._tooltip = pathInSettings;
   }
 
   _title: string;
-  _tooltip: string;
 
   update(pathInSettings: string, pathDisplayed: string): void {
     this._title = localize(
@@ -281,7 +277,6 @@ export class BuildLogPathInfoNode extends BaseNode {
       "{0}",
       `${pathDisplayed}`
     );
-    this._tooltip = pathInSettings;
   }
 
   getChildren(): BaseNode[] {
@@ -292,7 +287,10 @@ export class BuildLogPathInfoNode extends BaseNode {
     try {
       const item: vscode.TreeItem = new vscode.TreeItem(this._title);
       item.collapsibleState = vscode.TreeItemCollapsibleState.None;
-      item.tooltip = this._tooltip;
+      item.tooltip = localize(
+        "build.log.path.info",
+        "The path to the build log that is read to bypass a dry-run."
+      );
       item.contextValue = [`nodeType=buildLogPathInfo`].join(",");
       return item;
     } catch (e) {
@@ -377,10 +375,12 @@ export class ProjectOutlineProvider
     if (!pathInSettings) {
       if (kind === "Build Log") {
         extension.updateBuildLogPresent(false);
+        kind = localize("build.log", "Build Log");
       } else if (kind === "Makefile") {
         extension.updateMakefileFilePresent(false);
       }
-      return `${kind}: [Unset]`;
+      const unset = localize("Unset", "Unset");
+      return `${kind}: [${unset}]`;
     }
 
     const pathInSettingsToTest: string | undefined =
@@ -401,12 +401,15 @@ export class ProjectOutlineProvider
 
     if (kind === "Build Log") {
       extension.updateBuildLogPresent(checkFileExists);
+      kind = localize("build.log", "Build Log");
     } else if (kind === "Makefile") {
       extension.updateMakefileFilePresent(checkFileExists);
     }
 
+    const notFound = localize("not.found", "not found");
+
     return (
-      (!checkFileExists ? `${kind} (not found)` : `${kind}`) +
+      (!checkFileExists ? `${kind} (${notFound})` : `${kind}`) +
       `: [${
         makeRelative
           ? util.makeRelPath(finalPath, util.getWorkspaceRoot())
